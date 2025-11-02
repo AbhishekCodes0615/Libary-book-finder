@@ -19,6 +19,11 @@ cursor = conn.cursor(dictionary=True)
 def home():
     return render_template("index.html")
 
+# ✅ Route for home page
+@app.route('/dashboard')
+def dashboard():
+    return render_template('home.html')
+
 # ✅ Route for login POST
 @app.route("/login", methods=["POST"])
 def login():
@@ -36,11 +41,6 @@ def login():
     else:
         flash("❌ Invalid Login ID or Password. Please try again.", "danger")
         return redirect(url_for("home"))
-
-# ✅ Example Dashboard route
-@app.route("/dashboard")
-def dashboard():
-    return "<h2>Welcome to Library Dashboard!</h2>"
-
+    
 if __name__ == "__main__":
     app.run(debug=True)
