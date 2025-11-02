@@ -108,6 +108,11 @@ input {
 input:focus {
   border-color: #4caf50;
 }
+input :hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #eaeeeb;
+    border: 3px solid #23a045;
+}
 
 .btn {
   width: 100%;
@@ -127,3 +132,4 @@ input:focus {
   background-color: #1d863a;
 
 }
+
