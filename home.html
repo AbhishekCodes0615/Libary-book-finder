@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Dashboard</title>
+<link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<script src="home.js"></script>
+</head>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div>
+    <h2> LIBRARY BOOK FINDER</h2>
+    <ul>
+      <li class="active">Home</li>
+      <li>Catalogue</li>
+      <li>My books</li>
+      <li>About us</li>
+    </ul>
+  </div>
+  
+</div>
+
+<!-- Main -->
+<div class="main">
+  <div class="topbar">
+    <span class="menu-icon" onclick="toggleMenu()">☰</span>
+    <div class="search-box">
+      <input type="text" placeholder="Search for your next book...">
+    </div>
+    <div class="user">Username
+        <i class="fa-regular fa-user"></i>
+    </div>
+  </div>
+
+  <div class="banner">
+    <div class="banner-text">
+      <h3>Black History Month</h3>
+      <p>From influential leaders to cultural icons, explore works and stories that shaped generations.</p>
+      <button>Find out more</button>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Banner">
+  </div>
+
+  <div class="books">
+    <h3>My Books</h3>
+    <div class="book-list">
+      <div class="book">
+        <img src="https://m.media-amazon.com/images/I/71xBLRBYOiL._AC_UF1000,1000_QL80_.jpg" alt="Book 1">
+        <p>A Promised Land</p>
+      </div>
+      <div class="book">
+        <img src="https://m.media-amazon.com/images/I/81m1s4wIPML.jpg" alt="Book 2">
+        <p>Write Who You Are</p>
+      </div>
+      <div class="book">
+        <img src="https://m.media-amazon.com/images/I/91pR9wKJ3zL.jpg" alt="Book 3">
+        <p>Wuthering Heights</p>
+      </div>
+      <div class="book">
+        <img src="https://m.media-amazon.com/images/I/81t2CVWEsUL.jpg" alt="Book 4">
+        <p>A God in Ruins</p>
+      </div>
+      <div class="book">
+        <img src="https://m.media-amazon.com/images/I/91uwocAMtSL.jpg" alt="Book 5">
+        <p>What Echo Heard</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-box">
+      <h4>Reserved Books</h4>
+      <ul>
+        <li>The Secret Lives of Colour</li>
+        <li>Here in the Dark</li>
+        <li>Klara and the Sun</li>
+      </ul>
+    </div>
+
+    <div class="section-box">
+      <h4>Favourite Authors</h4>
+      <ul>
+        <li>Emily Brontë</li>
+        <li>Alex Miller</li>
+        <li>Chinua Achebe</li>
+      </ul>
+    </div>
+
+    <div class="section-box">
+      <h4>Popular Reads</h4>
+      <ul>
+        <li>A Passage North</li>
+        <li>The Sweetness of Water</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
