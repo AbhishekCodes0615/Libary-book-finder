@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Website - Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      Library Book Finder
+      <i class="fa-solid fa-book-open-reader"></i>
+    </div>
+    <div class="nav-links">
+      <a href="#">About us</a>
+    </div>
+  </nav>
+
+  <!-- Main Section -->
+  <div class="container">
+    <div class="illustration">
+      <img src="{{ url_for('static', filename='WhatsApp Image 2025-10-21 at 17.02.49_141e32fa.jpg') }}" alt="">
+    </div>
+
+    <div class="form-box">
+      <h2>Login</h2>
+
+      <!-- ✅ Flash Message Display Section -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category == 'success' %}
+              <p style="color: green; font-weight: bold;">{{ message }}</p>
+                {% else %}
+              <p style="color: red; font-weight: bold;">{{ message }}</p>
+            {% endif %}
+          {% endfor %}
+       {% endif %}
+      {% endwith %}
+
+      <!-- ✅ Login Form -->
+      <form action="/login" method="POST">
+        <input type="text" name="login_id" placeholder="Login ID" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button class="btn" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
