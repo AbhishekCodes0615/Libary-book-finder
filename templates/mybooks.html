@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Books — Library Book Finder</title>
-  <link rel="stylesheet" href="mybooks.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='mybooks.css') }}">
 </head>
 <body>
   <!-- Mobile overlay (click to close sidebar) -->
@@ -22,10 +22,10 @@
 
     <nav>
       <ul>
-        <li><a href="/HOMEPAGE/home.html">Home</a></li>
-        <li><a href="/CATALOGUE/catalogue.html">Catalogue</a></li>
-        <li class="active"><a href="/MYBOOKS/mybooks.html">My Books</a></li>
-        <li><a href="/ABOUTUS/aboutus.html">About Us</a></li>
+        <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+    <li><a href="{{ url_for('catalogue') }}">Catalogue</a></li>
+   <li><a href="{{ url_for('mybooks') }}">My Books</a></li>
+    <li class="active"><a href="{{ url_for('aboutus') }}">About Us</a></li>
       </ul>
     </nav>
   </aside>
@@ -60,6 +60,6 @@
     </div>
   </div>
 
-  <script defer src="mybooks.js"></script>
+  <script src="{{ url_for('static', filename='mybooks.js') }}"></script>
 </body>
 </html>

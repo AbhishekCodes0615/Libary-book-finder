@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Catalogue — Library Book Finder</title>
-  <link rel="stylesheet" href="catalogue.css">
+ <link rel="stylesheet" href="{{ url_for('static', filename='catalogue.css') }}">
   <!-- font awesome for user icon (optional) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-  <script defer src="catalogue.js"></script>
+  
 </head>
 <body>
 
@@ -16,10 +16,10 @@
   <div>
     <h2> LIBRARY BOOK FINDER</h2>
     <ul>
-      <li><a href="home.html">Home</a></li>
-      <li class="active"><a href="catalogue.html">Catalogue</a></li>
-      <li><a href="mybooks.html">My Books</a></li>
-      <li><a href="about.html">About Us</a></li>
+      <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+    <li class="active"><a href="{{ url_for('catalogue') }}">Catalogue</a></li>
+   <li><a href="{{ url_for('mybooks') }}">My Books</a></li>
+    <li><a href="{{ url_for('aboutus') }}">About Us</a></li>
     </ul>
   </div>
 </div>
@@ -77,5 +77,6 @@
   </div>
 </div>
 
+<script src="{{ url_for('static', filename='catalogue.js') }}"></script>
 </body>
 </html>

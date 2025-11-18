@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Us — Library Book Finder</title>
-  <link rel="stylesheet" href="aboutus.css">
+ <link rel="stylesheet" href="{{ url_for('static', filename='aboutus.css') }}">
 </head>
 <body>
 
@@ -23,10 +23,10 @@
 
     <nav>
       <ul>
-        <li><a href="/HOMEPAGE/home.html">Home</a></li>
-        <li><a href="/CATALOGUE/catalogue.html">Catalogue</a></li>
-        <li><a href="/MYBOOKS/mybooks.html">My Books</a></li>
-        <li class="active"><a href="/ABOUTUS/aboutus.html">About Us</a></li>
+       <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+    <li><a href="{{ url_for('catalogue') }}">Catalogue</a></li>
+   <li><a href="{{ url_for('mybooks') }}">My Books</a></li>
+    <li class="active"><a href="{{ url_for('aboutus') }}">About Us</a></li>
       </ul>
     </nav>
   </aside>
@@ -68,6 +68,6 @@
     </section>
   </main>
 
-  <script defer src="aboutus.js"></script>
+  <script src="{{ url_for('static', filename='aboutus.js') }}"></script>
 </body>
 </html>

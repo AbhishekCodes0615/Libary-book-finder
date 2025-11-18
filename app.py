@@ -24,6 +24,21 @@ def home():
 def dashboard():
     return render_template('home.html')
 
+# ✅ Route for home page
+@app.route('/catalogue')
+def catalogue():
+    return render_template('catalogue.html')
+
+# ✅ Route for home page
+@app.route('/mybooks')
+def mybooks():
+    return render_template('mybooks.html')
+
+# ✅ Route for home page
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html')
+
 # ✅ Route for login POST
 @app.route("/login", methods=["POST"])
 def login():
