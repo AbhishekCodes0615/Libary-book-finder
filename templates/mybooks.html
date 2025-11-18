@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Books — Library Book Finder</title>
+  <link rel="stylesheet" href="mybooks.css">
+</head>
+<body>
+  <!-- Mobile overlay (click to close sidebar) -->
+  <div id="mobileOverlay" class="mobile-overlay" onclick="closeSidebar()" aria-hidden="true"></div>
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar" aria-label="Main navigation">
+    <div class="brand">
+      <div class="logo">LB</div>
+      <div>
+        <h2>LIBRARY BOOK FINDER</h2>
+        <div style="font-size:12px;color:var(--muted)">Find & reserve books</div>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="/HOMEPAGE/home.html">Home</a></li>
+        <li><a href="/CATALOGUE/catalogue.html">Catalogue</a></li>
+        <li class="active"><a href="/MYBOOKS/mybooks.html">My Books</a></li>
+        <li><a href="/ABOUTUS/aboutus.html">About Us</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="mainContent">
+    <div class="topbar" role="banner">
+      <button id="menuBtn" class="menu-icon" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+      <h2 style="margin:0; font-size:18px;">My Reserved Books</h2>
+    </div>
+
+    <section class="catalogue-wrap">
+      <div id="myBooksGrid" class="books-grid" aria-live="polite">
+        <!-- Reserved books will load here -->
+      </div>
+
+      <div style="height:18px;"></div>
+
+      <div id="myBooksList"></div>
+    </section>
+  </main>
+
+  <!-- Modal for Return Confirmation -->
+  <div id="returnModalBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal small" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle">Return this book?</h3>
+      <p>Are you sure you want to remove this book from your reserved list?</p>
+      <div style="display:flex;gap:10px;margin-top:10px;">
+        <button id="confirmReturn" class="btn primary">Yes, Remove</button>
+        <button onclick="closeReturnModal()" class="btn ghost">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="mybooks.js"></script>
+</body>
+</html>

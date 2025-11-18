@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us — Library Book Finder</title>
+  <link rel="stylesheet" href="aboutus.css">
+</head>
+<body>
+
+  <!-- Mobile overlay (click to close) -->
+  <div id="mobileOverlay" class="mobile-overlay" onclick="closeSidebar()" aria-hidden="true"></div>
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar" aria-label="Main navigation">
+    <div class="brand">
+      <div class="logo">LB</div>
+      <div>
+        <h2>LIBRARY BOOK FINDER</h2>
+        <div style="font-size:12px;color:var(--muted)">Find & reserve books</div>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="/HOMEPAGE/home.html">Home</a></li>
+        <li><a href="/CATALOGUE/catalogue.html">Catalogue</a></li>
+        <li><a href="/MYBOOKS/mybooks.html">My Books</a></li>
+        <li class="active"><a href="/ABOUTUS/aboutus.html">About Us</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content" id="mainContent">
+    <header class="topbar" role="banner">
+      <button id="menuBtn" class="menu-icon" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+      <h1 style="margin:0;font-size:18px;">About Us</h1>
+    </header>
+
+    <section class="hero-text" aria-labelledby="heroHeading">
+      <h1 id="heroHeading">
+        Meet our team of <i>creators</i>, <i>designers</i>, and <i>problem solvers</i>
+      </h1>
+      <p class="hero-sub">
+        A Library Book Finder helps users quickly locate a book's position and availability in a library. This project saves time and effort compared to manual searching and can be implemented as a web or mobile app using a database-backed catalogue.
+      </p>
+    </section>
+
+    <section class="team-grid" aria-label="Team members">
+      <div class="team-card">
+        <img src="https://img.freepik.com/free-vector/woman-with-long-brown-hair-pink-shirt_90220-2940.jpg" alt="Ashi Agarwal">
+        <h3>Ashi Agarwal</h3>
+        <small>MySQL, Python</small>
+      </div>
+
+      <div class="team-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Ankit Singh">
+        <h3>Ankit Singh</h3>
+        <small>JavaScript</small>
+      </div>
+
+      <div class="team-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Abhishek Kumar">
+        <h3>Abhishek Kumar</h3>
+        <small>HTML, CSS</small>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="aboutus.js"></script>
+</body>
+</html>

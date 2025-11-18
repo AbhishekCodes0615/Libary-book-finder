@@ -1,0 +1,129 @@
+/* aboutus.css — Light-green theme + responsive sidebar (matches My Books theme) */
+
+/* ROOT */
+:root{
+  --bg: #f3fbf6;            /* page background - very light green */
+  --card-bg: #ffffff;
+  --text: #163d2b;         /* dark green text */
+  --muted: #6b7c6d;
+  --accent: #3a8a53;       /* main green accent */
+  --accent-dark: #3a8a53;
+  --sidebar-width: 250px;
+}
+
+/* GLOBAL */
+* { box-sizing: border-box; }
+html,body { height:100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--sidebar-width);
+  background: darkgreen;
+  padding: 24px 18px;
+  border-right: 1px solid rgba(20,60,40,0.06);
+  box-shadow: 0 6px 24px rgba(20,60,40,0.03);
+  transition: transform 260ms ease, box-shadow 260ms ease;
+  z-index: 1200;
+  transform: translateX(0);
+}
+
+/* Hidden / mobile or collapsed */
+.sidebar.collapsed { transform: translateX(-110%); }
+.sidebar.open { transform: translateX(0); }
+
+/* brand */
+.sidebar .brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom: 20px;
+}
+.brand .logo {
+  width:44px;
+  height:44px;
+  border-radius:10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-weight:800;
+  font-size:18px;
+  box-shadow: 0 8px 20px rgba(75, 177, 106, 0.12);
+}
+.sidebar h2 { margin:0; font-size:13px; color:white; font-weight:700; }
+
+/* navigation */
+.sidebar nav { margin-top:6px; }
+.sidebar ul { list-style:none; padding: 8px 0 0; margin:0; }
+.sidebar ul li { margin: 8px 0; }
+.sidebar ul li a {
+  display:flex; align-items:center; gap:10px;
+  padding: 10px 12px; color: white; text-decoration:none;
+  border-radius:10px; font-weight:700; transition: background 180ms ease, transform 160ms;
+}
+.sidebar ul li a:hover { background: rgba(76,177,106,0.08); transform: translateX(4px); }
+.sidebar ul li.active a { background: linear-gradient(90deg, rgba(77,177,106,0.12), rgba(77,177,106,0.06)); color: var(--accent-dark); }
+
+/* MAIN content area */
+.content {
+  margin-left: var(--sidebar-width);
+  padding: 32px;
+  transition: margin-left 220ms ease;
+  min-height: 100vh;
+}
+.sidebar.collapsed ~ .content { margin-left: 0; }
+
+/* TOPBAR (inside content) */
+.topbar {
+  display:flex; align-items:center; gap:12px;
+  padding: 12px; border-radius:12px; margin-bottom:18px;
+  background: var(--card-bg);
+  box-shadow: 0 8px 22px rgba(20,60,40,0.04);
+}
+.menu-icon {
+  font-size:22px; cursor:pointer; padding:8px; border-radius:8px;
+  user-select:none; display:inline-flex; align-items:center; justify-content:center;
+}
+.menu-icon:hover { background: rgba(0,0,0,0.03); }
+
+/* HERO + TEAM */
+.hero-text h1 { font-size:40px; font-weight:700; line-height:1.15; color:var(--accent-dark); margin:0; }
+.hero-text i { font-style:italic; color:var(--accent); }
+.hero-sub { margin-top:12px; max-width:700px; font-size:15px; color:var(--muted); }
+
+/* team grid */
+.team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:28px; margin-top:34px; }
+.team-card { background:var(--card-bg); padding:18px; border-radius:14px; text-align:center; box-shadow:0 6px 18px rgba(20,60,40,0.04); border:1px solid rgba(35,160,69,0.08); transition: transform .22s ease; }
+.team-card:hover { transform: translateY(-6px); box-shadow:0 12px 30px rgba(20,60,40,0.08); border-color: rgba(35,160,69,0.16); }
+.team-card img { width:60%; border-radius:12px; margin-bottom:12px; }
+.team-card h3 { font-size:18px; margin:6px 0; color:var(--accent-dark); }
+.team-card small { font-size:13px; color:var(--muted); }
+
+/* overlay for mobile */
+.mobile-overlay {
+  display:none; position: fixed; inset: 0; background: rgba(10,20,10,0.18);
+  z-index: 1100; opacity:0; transition: opacity 160ms ease;
+}
+.mobile-overlay.show { display:block; opacity:1; }
+
+/* responsive */
+@media (max-width: 900px) {
+  :root { --sidebar-width: 280px; }
+  .sidebar { transform: translateX(-110%); position: fixed; }
+  .sidebar.open { transform: translateX(0); }
+  .content { margin-left: 0; padding: 18px; }
+  .mobile-overlay { display:block; }
+}
