@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalogue — Library Book Finder</title>
+  <link rel="stylesheet" href="catalogue.css">
+  <!-- font awesome for user icon (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <script defer src="catalogue.js"></script>
+</head>
+<body>
+
+<!-- reuse existing sidebar and topbar from home.html, make sure links point correctly -->
+<div class="sidebar" id="sidebar" aria-label="Primary">
+  <div>
+    <h2> LIBRARY BOOK FINDER</h2>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li class="active"><a href="catalogue.html">Catalogue</a></li>
+      <li><a href="mybooks.html">My Books</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <span class="menu-icon" onclick="toggleMenu()" aria-hidden="true">☰</span>
+    <div class="search-box" role="search">
+      <input id="globalSearch" type="text" placeholder="Search for books, authors, ISBN..." aria-label="Search all books">
+    </div>
+    <div class="user" aria-hidden="false">Username <i class="fa-regular fa-user"></i></div>
+  </div>
+
+  <div class="catalogue-wrap" role="main">
+    <div class="catalogue-header">
+      <h2>Catalogue</h2>
+      <div class="controls" role="region" aria-label="Catalogue controls">
+        <input class="search" id="localSearch" type="text" placeholder="Search in catalogue..." aria-label="Search in catalogue">
+        <select id="categoryFilter" aria-label="Filter by category">
+          <option value="">All categories</option>
+          <option>Literature</option>
+          <option>Sci-Fi (Science Fiction)</option>
+          <option>Historical</option>
+          <option>Computer Science (CS)</option>
+        </select>
+        <select id="sortBy" class="sort" aria-label="Sort books">
+          <option value="title">Sort: Title</option>
+          <option value="author">Sort: Author</option>
+          <option value="year">Sort: Year</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="booksGrid" class="books-grid" aria-live="polite">
+      <!-- JS will render book cards here -->
+    </div>
+
+    <div class="pagination" id="pagination" aria-label="Pagination"></div>
+  </div>
+</div>
+
+<!-- Book Detail Modal -->
+<div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+  <div class="modal" role="document" aria-modal="true">
+    <div class="left"><img id="modalCover" src="" alt="Book cover"></div>
+    <div class="right">
+      <h3 id="modalTitle">Title</h3>
+      <div class="meta" id="modalAuthor">Author • Year</div>
+      <p class="desc" id="modalDesc">Description...</p>
+      <div class="row"style="display:flex; gap:10px; margin-top:12px;">
+        <button id="reserveBtn" class="btn primary">Reserve</button>
+        <button id="closeModal" class="btn ghost">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
