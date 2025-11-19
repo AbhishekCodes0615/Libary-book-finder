@@ -36,7 +36,7 @@ body{
 /* SIDEBAR */
 .sidebar{
   width:230px;
-  background:var(--sidebar-bg);
+  background:#4a7540;
   color:#fff;
   display:flex;
   flex-direction:column;
@@ -51,7 +51,7 @@ body{
   font-size:18px;
   letter-spacing:1px;
   margin-bottom:30px;
-  color:#000000;
+  color:white;
 }
 
 .sidebar ul{list-style:none}
@@ -135,11 +135,16 @@ body{
   border-color:var(--green-accent);
 }
 
-.user{
-  background:#e1f2e0;
-  padding:8px 12px;
-  border-radius:20px;
-  cursor:pointer;
+.logout {
+  background: #e1f2e0;
+  padding: 8px 12px;
+  border-radius: 20px;
+  color: #2b2b2b;
+  cursor: pointer;
+}
+.logout :hover{
+  background-color: #23a045;
+
 }
 
 /* CATALOGUE HEADER */
@@ -310,4 +315,80 @@ body{
   .search-box input{width:200px}
 
   .modal{flex-direction:column;align-items:center}
+}
+
+/* ---------- Responsive sidebar behavior & overlay ---------- */
+
+/* ensure transform is used for hide/show so animation works smoothly */
+.sidebar{
+  transform: translateX(0);
+  transition: transform .28s ease, box-shadow .28s ease;
+  will-change: transform;
+}
+
+/* mobile: keep sidebar hidden by default (we'll toggle .hide) */
+@media (max-width: 992px) {
+  .sidebar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 1200;
+    width: 260px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    transform: translateX(-100%);
+    background: var(--sidebar-bg);
+  }
+
+  /* class to show the sidebar */
+  .sidebar:not(.hide){
+    transform: translateX(0);
+  }
+
+  /* menu icon visible on small devices */
+  .menu-icon{
+    display:block;
+    color:var(--green-accent);
+    font-size:22px;
+    cursor:pointer;
+  }
+
+  /* overlay covers page when sidebar open */
+  .sidebar-overlay{
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(1px);
+  }
+  .sidebar-overlay.show{
+    display:block;
+  }
+
+  /* ensure main content isn't interactive under overlay */
+  .main[aria-hidden="true"]{
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+/* larger screens: keep menu-icon hidden (restore original behavior) */
+@media (min-width: 993px) {
+  .sidebar{
+    position: static;
+    transform: translateX(0) !important;
+    width: 230px;
+    box-shadow: none;
+  }
+  .menu-icon{ display:none; }
+  .sidebar-overlay{ display:none; }
+}
+
+/* small accessibility focus state for the menu icon */
+.menu-icon:focus{
+  outline: 3px solid rgba(35,160,69,0.2);
+  outline-offset: 3px;
+  border-radius:6px;
 }

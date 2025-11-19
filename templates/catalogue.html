@@ -4,33 +4,32 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Catalogue — Library Book Finder</title>
- <link rel="stylesheet" href="{{ url_for('static', filename='catalogue.css') }}">
+  <link rel="stylesheet" href="catalogue.css">
   <!-- font awesome for user icon (optional) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-  
 </head>
 <body>
 
 <!-- reuse existing sidebar and topbar from home.html, make sure links point correctly -->
-<div class="sidebar" id="sidebar" aria-label="Primary">
+<div id="sidebar" class="sidebar hide" aria-label="Primary">
   <div>
     <h2> LIBRARY BOOK FINDER</h2>
     <ul>
       <li><a href="{{ url_for('dashboard') }}">Home</a></li>
-    <li class="active"><a href="{{ url_for('catalogue') }}">Catalogue</a></li>
-   <li><a href="{{ url_for('mybooks') }}">My Books</a></li>
-    <li><a href="{{ url_for('aboutus') }}">About Us</a></li>
+      <li class="active"><a href="{{ url_for('catalogue') }}">Catalogue</a></li>
+      <li><a href="{{ url_for('mybooks') }}">My Books</a></li>
+      <li><a href="{{ url_for('aboutus') }}">About Us</a></li>
     </ul>
   </div>
 </div>
 
 <div class="main">
   <div class="topbar">
-    <span class="menu-icon" onclick="toggleMenu()" aria-hidden="true">☰</span>
+    <span id="menuBtn" class="menu-icon" onclick="toggleMenu()" role="button" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">☰</span>
     <div class="search-box" role="search">
       <input id="globalSearch" type="text" placeholder="Search for books, authors, ISBN..." aria-label="Search all books">
     </div>
-    <div class="user" aria-hidden="false">Username <i class="fa-regular fa-user"></i></div>
+    <div class="logout">Logout</div> 
   </div>
 
   <div class="catalogue-wrap" role="main">
@@ -61,6 +60,9 @@
   </div>
 </div>
 
+<!-- overlay (for mobile when sidebar open) -->
+<div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
 <!-- Book Detail Modal -->
 <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
   <div class="modal" role="document" aria-modal="true">
@@ -69,7 +71,7 @@
       <h3 id="modalTitle">Title</h3>
       <div class="meta" id="modalAuthor">Author • Year</div>
       <p class="desc" id="modalDesc">Description...</p>
-      <div class="row"style="display:flex; gap:10px; margin-top:12px;">
+      <div class="row" style="display:flex; gap:10px; margin-top:12px;">
         <button id="reserveBtn" class="btn primary">Reserve</button>
         <button id="closeModal" class="btn ghost">Close</button>
       </div>
@@ -77,6 +79,6 @@
   </div>
 </div>
 
-<script src="{{ url_for('static', filename='catalogue.js') }}"></script>
+<script src="catalogue.js"></script>
 </body>
 </html>

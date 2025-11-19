@@ -4,47 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
 
 <!-- Sidebar -->
-<div class="sidebar" id="sidebar">
+<div class="sidebar hide" id="sidebar" aria-hidden="true">
   <div>
     <h2> LIBRARY BOOK FINDER</h2>
-  <ul>
-   <li class="active"><a href="{{ url_for('dashboard') }}">Home</a></li>
-    <li><a href="{{ url_for('catalogue') }}">Catalogue</a></li>
-   <li><a href="{{ url_for('mybooks') }}">My Books</a></li>
-    <li><a href="{{ url_for('aboutus') }}">About Us</a></li>
-</ul>
-
+    <ul>
+      <li class="active"><a href="{{ url_for('dashboard') }}">Home</a></li>
+      <li><a href="{{ url_for('catalogue') }}">Catalogue</a></li>
+      <li><a href="{{ url_for('mybooks') }}">My Books</a></li>
+      <li><a href="{{ url_for('aboutus') }}">About Us</a></li>
+    </ul>
   </div>
-  
 </div>
 
+<!-- Overlay (used on small screens when sidebar is open) -->
+<div class="sidebar-overlay" id="sidebarOverlay" tabindex="-1" aria-hidden="true"></div>
+
 <!-- Main -->
-<div class="main">
+<div class="main" id="mainContent">
   <div class="topbar">
-    <span class="menu-icon" onclick="toggleMenu()">☰</span>
+    <!-- menu button (visible on small screens) -->
+    <button id="menuBtn" class="menu-icon" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">☰</button>
+
     <div class="search-box">
       <input type="text" placeholder="Search for your next book...">
     </div>
-    <div class="user">Username
+    <div class="logout">Logout
         <i class="fa-regular fa-user"></i>
     </div>
   </div>
 
-<div class="banner">
+  <div class="banner">
     <div class="banner-text">
-        <h1>Welcome to the Library</h1>
-        <p>Discover, explore, and read your favourite books anytime.</p>
-        <button class="banner-btn">Browse Books</button>
+      <h1>Welcome to the Library</h1>
+      <p>Discover, explore, and read your favourite books anytime.</p>
+      <button class="banner-btn">Browse Books</button>
     </div>
     <div class="banner-img">
-        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Library Illustration">
+      <!-- <img src="WhatsApp Image 2025-11-19 at 18.14.26_767ba3ef.jpg" alt="Library Illustration"> -->
     </div>
-</div>
+  </div>
 
   <div class="books">
     <h3>My Books</h3>
@@ -101,7 +104,7 @@
   </div>
 </div>
 
-<script src="{{ url_for('static', filename='home.js') }}"></script>
+<script src="home.js"></script>
 
 </body>
 </html>

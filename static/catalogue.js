@@ -17,7 +17,7 @@
     { id: 'b13', title: ' The Book Thief', author: 'Markus Zusak', year: 1939, category: ' Historical', isbn: 'B3', cover: '/static/book thief.jpg', desc: 'He Book Thief by Markus Zusak is an internationally best-selling and critically acclaimed historical fiction novel, narrated by Death, that tells the story of a young girl' +'s'+' experiences in Nazi Germany during World War II.' },
     { id: 'b14', title: 'All the Light We Cannot See', author: 'Anthony Doerr', year: 2018, category: ' Historical', isbn: 'B3', cover: '/static/all the light.jpg', desc: 'from the highly acclaimed, multiple award-winning Anthony Doerr, the stunningly beautiful instant bestseller about a blind French girl and a German boy whose paths collide in occupied France as both try to survive the devastation of world War II.' },
     { id: 'b15', title: 'Wolf Hall', author: 'Hilary Mantel', year: 2009, category: 'Historical', isbn: 'B3', cover: '/static/Wolf_Hall_cover.jpg', desc: 'Set in the period from 1500 to 1535, Wolf Hall is a sympathetic fictionalised biography documenting the rapid rise to power of Thomas Cromwell in the court of Henry VIII through to the death of Sir Thomas More. The novel won both the Booker Prize and the National Book Critics Circle Award.' },
-    { id: 'b16', title: 'The Diary of a Young Girl', author: 'Anne Frank', year: 1947, category: 'Historical', isbn: 'B3', cover: '/static/dairy of a young.jpg', desc: 'The Diary of a Young Girl is a non-fiction book by Anne Frank that chronicles her family'+'s two years in hiding from the Nazis during World War II in Amsterdam. Written in a diary format, it documents her experiences, fears, and hopes while living in a secret annex, and is a powerful testament to the human spirit amidst the horrors of the Holocaust. The diary provides a personal, philosophical, and often humorous account of a teenager'+'s life in confinement, detailing her relationships, and her evolving thoughts on the war and humanity.' },
+    { id: 'b16', title: 'The Diary of a Young Girl', author: 'Anne Frank', year: 1947, category: 'Historical', isbn: 'B3', cover: '/static/dairy of a young.jpg', desc: 'The Diary of a Young Girl is a non-fiction book by Anne Frank that chronicles her family'+'s two years in hiding from the Nazis during World War II in Amsterdam. Written in a diary format, it documents her experiences, fears, and hopes while living in a secret annex, and is a powerful testament to the human spirit amidst the horrors of the Holocaust. The diary provides a personal, philosophical, and often humorous account of a teenager'+'s life in confinement, detailing her relationships, and her evolving thoughts on the war and humanity.' },
 
   ];
 
@@ -217,13 +217,88 @@
   categoryFilter.addEventListener('change', (e)=>{ state.category = e.target.value; state.page = 1; render(); });
   sortBy.addEventListener('change', (e)=>{ state.sortBy = e.target.value; state.page = 1; render(); });
 
-  // topbar menu toggle for small screens
+  /* ---------- Responsive sidebar/menu logic (replaced) ---------- */
+
+  // improved toggleMenu: toggles .hide and manages overlay + ARIA
   window.toggleMenu = function toggleMenu(){
     const sb = document.getElementById('sidebar');
+    const btn = document.getElementById('menuBtn');
+    const overlay = document.getElementById('sidebarOverlay');
+
     if(!sb) return;
-    const showing = sb.style.display !== 'none' && sb.style.display !== '';
-    sb.style.display = showing ? 'none' : 'block';
+
+    const isHidden = sb.classList.contains('hide');
+    // toggle class
+    if(isHidden){
+      sb.classList.remove('hide');
+    } else {
+      sb.classList.add('hide');
+    }
+
+    // update aria-expanded on button for accessibility
+    if(btn){
+      btn.setAttribute('aria-expanded', String(!isHidden));
+    }
+
+    // show/hide overlay based on sidebar
+    if(sb.classList.contains('hide')){
+      overlay?.classList.remove('show');
+      overlay?.setAttribute('aria-hidden','true');
+      document.querySelector('.main')?.removeAttribute('aria-hidden');
+    } else {
+      overlay?.classList.add('show');
+      overlay?.setAttribute('aria-hidden','false');
+      document.querySelector('.main')?.setAttribute('aria-hidden','true');
+    }
   };
+
+  // overlay click closes sidebar
+  document.getElementById('sidebarOverlay')?.addEventListener('click', ()=> {
+    const sb = document.getElementById('sidebar');
+    const btn = document.getElementById('menuBtn');
+    const overlay = document.getElementById('sidebarOverlay');
+    if(sb) sb.classList.add('hide');
+    if(btn) btn.setAttribute('aria-expanded','false');
+    if(overlay) { overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); }
+    document.querySelector('.main')?.removeAttribute('aria-hidden');
+  });
+
+  // close sidebar automatically on escape key (accessibility)
+  document.addEventListener('keydown', (e) => {
+    const sb = document.getElementById('sidebar');
+    const btn = document.getElementById('menuBtn');
+    const overlay = document.getElementById('sidebarOverlay');
+    if(!sb) return;
+    if(e.key === 'Escape' && !sb.classList.contains('hide')){
+      sb.classList.add('hide');
+      if(btn) btn.setAttribute('aria-expanded','false');
+      if(overlay) { overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); }
+      document.querySelector('.main')?.removeAttribute('aria-hidden');
+    }
+  });
+
+  // if window is resized to large screen, ensure sidebar is visible and overlay hidden
+  window.addEventListener('resize', () => {
+    const sb = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const btn = document.getElementById('menuBtn');
+    if(window.innerWidth > 992){
+      if(sb) sb.classList.remove('hide');
+      if(overlay) { overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); }
+      if(btn) btn.setAttribute('aria-expanded','false');
+      document.querySelector('.main')?.removeAttribute('aria-hidden');
+    } else {
+      // on small screens keep sidebar hidden by default unless user opened it
+      if(sb && !sb.classList.contains('hide')){
+        // leave as-is (user may have opened it)
+      } else if(sb){
+        sb.classList.add('hide');
+      }
+    }
+  });
+
+  // ensure initial state matches viewport on load
+  setTimeout(()=>{ window.dispatchEvent(new Event('resize')); }, 30);
 
   // util: escape HTML for safety in inserts
   function escapeHtml(str=''){
