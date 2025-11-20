@@ -1,129 +1,229 @@
-/* aboutus.css — Light-green theme + responsive sidebar (matches My Books theme) */
-
-/* ROOT */
-:root{
-  --bg: #f3fbf6;            /* page background - very light green */
-  --card-bg: #ffffff;
-  --text: #163d2b;         /* dark green text */
-  --muted: #6b7c6d;
-  --accent: #3a8a53;       /* main green accent */
-  --accent-dark: #3a8a53;
-  --sidebar-width: 250px;
-}
-
-/* GLOBAL */
-* { box-sizing: border-box; }
-html,body { height:100%; }
+/* ===== GLOBAL STYLES ===== */
 body {
-  margin: 0;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #faf9ff;
+    color: #333;
+    display: flex;
 }
 
-/* SIDEBAR */
+/* ===== MENU BUTTON (added) ===== */
+.menu-btn {
+    display: block; /* shown on small screens via media query */
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 60;  
+    background: transparent; 
+    color: lightgreen;
+    cursor: pointer;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 22px;
+    line-height: 1;
+    
+    /* box-shadow: 0 6px 18px rgba(74,74,216,0.12);  */
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+/* small pressed effect */
+.menu-btn:active { transform: scale(0.98); }
+
+/* ===== SIDEBAR ===== */
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: var(--sidebar-width);
-  background: #5b9151;
-  padding: 24px 18px;
-  border-right: 1px solid rgba(20,60,40,0.06);
-  box-shadow: 0 6px 24px rgba(20,60,40,0.03);
-  transition: transform 260ms ease, box-shadow 260ms ease;
-  z-index: 1200;
-  transform: translateX(0);
+    width: 230px;
+    background: #4a7540;
+    height: 100vh;
+    padding: 28px 20px;
+    border-right: 1px solid #eee;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 50;
+    transition: transform 0.28s cubic-bezier(.2,.9,.2,1);
 }
 
-/* Hidden / mobile or collapsed */
-.sidebar.collapsed { transform: translateX(-110%); }
-.sidebar.open { transform: translateX(0); }
-
-/* brand */
-.sidebar .brand {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom: 20px;
+/* When sidebar is 'open' on small screens we add class .open to show it */
+.sidebar.open {
+    transform: translateX(0);
 }
-.brand .logo {
-  width:44px;
-  height:44px;
-  border-radius:10px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-weight:800;
-  font-size:18px;
-  box-shadow: 0 8px 20px rgba(75, 177, 106, 0.12);
-}
-.sidebar h2 { margin:0; font-size:13px; color:white; font-weight:700; }
 
-/* navigation */
-.sidebar nav { margin-top:6px; }
-.sidebar ul { list-style:none; padding: 8px 0 0; margin:0; }
-.sidebar ul li { margin: 8px 0; }
-.sidebar ul li a {
-  display:flex; align-items:center; gap:10px;
-  padding: 10px 12px; color: white; text-decoration:none;
-  border-radius:10px; font-weight:700; transition: background 180ms ease, transform 160ms;
-}
-.sidebar ul li a:hover { background: rgba(76,177,106,0.08); transform: translateX(4px); }
-.sidebar ul li.active a { background: linear-gradient(90deg, rgba(77,177,106,0.12), rgba(77,177,106,0.06)); color: var(--accent-dark); }
+/* collapsed state (used on small screens via media query) */
+/* default transform for small screens is set in media query below */
 
-/* MAIN content area */
+/* rest of sidebar styles unchanged */
+.sidebar-title {
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 26px;
+  color: #ffffff;          
+}
+
+.nav-list {
+    list-style: none;
+    margin-top: 6px;
+}
+
+.nav-list li {
+    margin:6px 0;
+}
+
+.nav-list a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #e6f2e3;
+    padding: 8px 10px;
+    display: block;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
+
+.nav-list a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-list a.active {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* ===== MAIN CONTENT ===== */
 .content {
-  margin-left: var(--sidebar-width);
-  padding: 32px;
-  transition: margin-left 220ms ease;
-  min-height: 100vh;
+    flex: 1;
+    padding: 50px 70px;
+    overflow-y: auto;
 }
-.sidebar.collapsed ~ .content { margin-left: 0; }
 
-/* TOPBAR (inside content) */
-.topbar {
-  display:flex; align-items:center; gap:12px;
-  padding: 12px; border-radius:12px; margin-bottom:18px;
-  background: var(--card-bg);
-  box-shadow: 0 8px 22px rgba(20,60,40,0.04);
+/* ===== HERO SECTION ===== */
+.hero-text h1 {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.2; 
+    max-width: 700px;
+    color: #2b8a3e;
 }
-.menu-icon {
-  font-size:22px; cursor:pointer; padding:8px; border-radius:8px;
-  user-select:none; display:inline-flex; align-items:center; justify-content:center;
+
+.hero-text i {
+    font-style: italic;
 }
-.menu-icon:hover { background: rgba(0,0,0,0.03); }
 
-/* HERO + TEAM */
-.hero-text h1 { font-size:40px; font-weight:700; line-height:1.15; color:var(--accent-dark); margin:0; }
-.hero-text i { font-style:italic; color:var(--accent); }
-.hero-sub { margin-top:12px; max-width:700px; font-size:15px; color:var(--muted); }
-
-/* team grid */
-.team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:28px; margin-top:34px; }
-.team-card { background:var(--card-bg); padding:18px; border-radius:14px; text-align:center; box-shadow:0 6px 18px rgba(20,60,40,0.04); border:1px solid rgba(35,160,69,0.08); transition: transform .22s ease; }
-.team-card:hover { transform: translateY(-6px); box-shadow:0 12px 30px rgba(20,60,40,0.08); border-color: rgba(35,160,69,0.16); }
-.team-card img { width:60%; border-radius:12px; margin-bottom:12px; }
-.team-card h3 { font-size:18px; margin:6px 0; color:var(--accent-dark); }
-.team-card small { font-size:13px; color:var(--muted); }
-
-/* overlay for mobile */
-.mobile-overlay {
-  display:none; position: fixed; inset: 0; background: rgba(10,20,10,0.18);
-  z-index: 1100; opacity:0; transition: opacity 160ms ease;
+.hero-sub {
+    margin-top: 20px;
+    max-width: 520px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
 }
-.mobile-overlay.show { display:block; opacity:1; }
 
-/* responsive */
+/* ===== TEAM GRID ===== */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 35px;
+    margin-top: 55px;
+}
+
+.team-card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.team-card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px #e2efe7;
+  border:2px solid #23a045;
+}
+
+.team-card img {
+    width: 60%;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+
+.team-card h3 {
+    font-size: 18px;
+    margin: 0 0 5px 0;
+}
+
+.team-card small {
+    font-size: 14px;
+    color: #777;
+}
+/* logout  */
+.logout {
+  background: #e1f2e0;
+  padding: 8px 12px;
+  border-radius: 20px;
+  color: #2b2b2b;
+  cursor: pointer;
+}
+.logout :hover{
+  background-color: #23a045;
+
+}
+
+/* ===== SIDEBAR OVERLAY (added) ===== */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.28);
+    z-index: 40;
+    transition: opacity 0.2s ease;
+    opacity: 0;
+}
+
+/* When visible (small screens) we'll set display:block and opacity:1 via media query when sidebar is open */
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  :root { --sidebar-width: 280px; }
-  .sidebar { transform: translateX(-110%); position: fixed; }
-  .sidebar.open { transform: translateX(0); }
-  .content { margin-left: 0; padding: 18px; }
-  .mobile-overlay { display:block; }
+    /* show menu button on small screens */
+    .menu-btn {
+        display: block;
+    }
+
+    /* make sidebar overlay and sidebar behavior for small screens */
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        transform: translateX(-110%); /* hidden by default */
+        will-change: transform;
+        box-shadow: 8px 0 30px rgba(24, 20, 64, 0.08);
+    }
+
+    /* when open we add .open class (see JS) */
+    .sidebar.open + .content { /* no effect but keeps specificity; actual transform handled on .sidebar.open */ }
+
+    .sidebar.open ~ .sidebar-overlay {
+        display: block;
+        opacity: 1;
+    }
+
+    /* overlay visible when sidebar is open (we rely on .sidebar.open to show overlay) */
+    .sidebar.open ~ .sidebar-overlay {
+        display: block;
+    }
+
+    /* show overlay with opacity transition */
+    .sidebar.open ~ .sidebar-overlay {
+        opacity: 1;
+    }
+
+    /* main content should still scroll underneath; padding can be slightly reduced on small screens */
+    .content {
+        padding: 22px 18px;
+    }
+}
+
+/* Keep theme and look consistent on large screens; menu button hidden there */
+@media (min-width: 901px) {
+    .sidebar-overlay { display: none !important; }
+    .menu-btn { display: none !important; }
 }

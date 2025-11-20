@@ -1,69 +1,56 @@
-// aboutus.js — responsive sidebar toggle + overlay behavior (matching My Books logic)
+// Toggle sidebar open/close
+        (function(){
+            const menuBtn = document.querySelector('.menu-btn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const navLinks = document.querySelectorAll('.nav-list a');
 
-const sidebar = document.getElementById('sidebar');
-const mobileOverlay = document.getElementById('mobileOverlay');
-const menuBtn = document.getElementById('menuBtn');
+            function setAria(expanded) {
+                menuBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                overlay.setAttribute('aria-hidden', expanded ? 'false' : 'true');
+            }
 
-function isMobile() {
-  return window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
-}
+            // open/close handler
+            function toggleSidebar() {
+                const isOpen = sidebar.classList.toggle('open');
+                setAria(isOpen);
+            }
 
-function openSidebar() {
-  if (!sidebar) return;
-  if (isMobile()) {
-    sidebar.classList.add('open');
-    mobileOverlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  } else {
-    sidebar.classList.remove('collapsed');
-  }
-}
+            menuBtn.addEventListener('click', function(e){
+                e.stopPropagation();
+                toggleSidebar();
+            });
 
-function closeSidebar() {
-  if (!sidebar) return;
-  if (isMobile()) {
-    sidebar.classList.remove('open');
-    mobileOverlay.classList.remove('show');
-    document.body.style.overflow = '';
-  } else {
-    sidebar.classList.add('collapsed');
-  }
-}
+            // clicking overlay closes sidebar
+            overlay.addEventListener('click', function(){
+                sidebar.classList.remove('open');
+                setAria(false);
+            });
 
-function toggleMenu() {
-  if (!sidebar) return;
-  if (isMobile()) {
-    if (sidebar.classList.contains('open')) closeSidebar();
-    else openSidebar();
-  } else {
-    sidebar.classList.toggle('collapsed');
-  }
-}
+            // close sidebar when a nav link is clicked (useful on small screens)
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(){
+                    if (window.matchMedia('(max-width: 900px)').matches) {
+                        sidebar.classList.remove('open');
+                        setAria(false);
+                    }
+                });
+            });
 
-// expose to global (used by inline onclick)
-window.toggleMenu = toggleMenu;
-window.closeSidebar = closeSidebar;
+            // optional: close sidebar on ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('open');
+                    setAria(false);
+                }
+            });
 
-// close sidebar when clicking the overlay
-if (mobileOverlay) {
-  mobileOverlay.addEventListener('click', closeSidebar);
-}
-
-// close sidebar on ESC
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeSidebar();
-});
-
-// Keep sidebar state consistent on resize
-window.addEventListener('resize', () => {
-  if (!sidebar) return;
-  if (!isMobile()) {
-    sidebar.classList.remove('open');
-    mobileOverlay.classList.remove('show');
-    document.body.style.overflow = '';
-    // leave collapsed state as-is (user toggle)
-  } else {
-    // on mobile start closed
-    sidebar.classList.remove('collapsed');
-  }
-});
+            // Ensure correct state on resize
+            window.addEventListener('resize', () => {
+                if (!window.matchMedia('(max-width: 900px)').matches) {
+                    // on large screens ensure aria reflects visible sidebar
+                    sidebar.classList.remove('open'); // we use transform only for small screens
+                    setAria(false);
+                }
+            });
+        })();
