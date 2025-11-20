@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us</title>
 
-    <link rel="stylesheet" href="aboutus.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='aboutus.css') }}">
 </head>
 
 <body>
@@ -18,10 +18,10 @@
         <h2 class="sidebar-title">LIBRARY BOOK FINDER</h2>
 
         <ul class="nav-list">
-            <li><a href="/HOMEPAGE/home.html">Home</a></li>
-            <li><a href="/CATALOGUE/catalogue.html">Catalogue</a></li>
-            <li><a href="/MYBOOKS/mybooks.html">My Books</a></li>
-            <li><a href="/ABOUTUS/aboutus.html" class="active">About Us</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+      <li><a href="{{ url_for('catalogue') }}">Catalogue</a></li>
+      <li><a href="{{ url_for('mybooks') }}">My Books</a></li>
+      <li class="active"><a href="{{ url_for('aboutus') }}">About Us</a></li>
         </ul>
     </aside>
     
@@ -75,7 +75,7 @@
     <!-- overlay to close sidebar on small screens -->
     <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
 
-    <script src="aboutus.js"> </script>
+    <script src="{{ url_for('static', filename='aboutus.js') }}"></script>
 
 </body>
 </html>
