@@ -217,7 +217,7 @@
   categoryFilter.addEventListener('change', (e)=>{ state.category = e.target.value; state.page = 1; render(); });
   sortBy.addEventListener('change', (e)=>{ state.sortBy = e.target.value; state.page = 1; render(); });
 
-  /* ---------- Responsive sidebar/menu logic (replaced) ---------- */
+  
 
   // improved toggleMenu: toggles .hide and manages overlay + ARIA
   window.toggleMenu = function toggleMenu(){

@@ -1,6 +1,6 @@
-// mybooks.js — show reserved books + responsive sidebar
+
 (() => {
-  // ✅ SAME BOOK DATA AS catalogue.js (so IDs match)
+ 
   const books = [
     { id: 'b1', title: 'Pride and Prejudice', author: 'Jane Austen', year: 1813, category: 'Literature', isbn: 'A2', cover: 'static/pride.jpg', desc: 'Pride and Prejudice is a romantic novel by Jane Austen, first published in 1813, that follows the witty and spirited Elizabeth Bennet as she navigates issues of manners, upbringing, morality, and marriage in the landed gentry of early 19th-century England. The story centers on the volatile relationship between Elizabeth and the proud, wealthy Mr. Darcy, who must overcome their initial prejudices and pride to find love and happiness. The novel is also known for its satirical commentary on the social pressures faced by the five Bennet daughters, whose family estate is entailed and must be inherited by a male relative, making marriage a crucial goal. ' },
     { id: 'b2', title: 'To Kill a Mockingbird', author: 'Harper Lee', year: 1960, category: 'Literature', isbn: 'A2', cover: 'static/to kill.jpg', desc: 'To Kill a Mockingbird is a 1960 novel by Harper Lee set in the fictional town of Maycomb, Alabama, during the Great Depression. Narrated by a young girl named Scout Finch,  the story follows her and her brother Jem as they are raised by their widowed father, lawyer Atticus Finch. The narrative focuses on two main events: Atticus defense of Tom Robinson, a Black man falsely accused of raping a white woman, and the children fascination with their reclusive neighbor, Boo Radley. The novel is a coming-of-age story that explores themes of racial injustice, prejudice, and moral courage through the innocent eyes of a child.' },
@@ -20,7 +20,7 @@
     { id: 'b16', title: 'The Diary of a Young Girl', author: 'Anne Frank', year: 1947, category: 'Historical', isbn: 'B3', cover: 'static/dairy of a young.jpg', desc: 'The Diary of a Young Girl is a non-fiction book by Anne Frank that chronicles her family'+'s two years in hiding from the Nazis during World War II in Amsterdam. Written in a diary format, it documents her experiences, fears, and hopes while living in a secret annex, and is a powerful testament to the human spirit amidst the horrors of the Holocaust. The diary provides a personal, philosophical, and often humorous account of a teenager'+'s life in confinement, detailing her relationships, and her evolving thoughts on the war and humanity.' },
   ];
 
-  // 🔐 same localStorage key as catalogue.js
+  
   const RESERVED_KEY = 'catalogue_reserved_ids';
 
   // DOM
@@ -137,7 +137,7 @@
     render(e.target.value);
   });
 
-  // ✅ Responsive sidebar toggle just for this page
+  // Responsive sidebar toggle 
   function openSidebar(){
     if(!sidebar) return;
     sidebar.classList.remove('hide');
