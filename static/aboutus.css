@@ -1,160 +1,138 @@
-/* ===== GLOBAL STYLES ===== */
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #faf9ff;
-    color: #333;
-    display: flex;
+/* Light-Green About Us Theme (same as Catalogue) */
+
+/* ROOT COLORS */
+:root{
+  --bg: #f0f8ee;
+  --text: #2b2b2b;
+
+  --green-dark: #4a7540;
+  --green-mid: #5b9151;
+  --green-accent: #23a045;
+
+  --sidebar-bg: #4a7540;
+  --sidebar-text: #e6f2e3;
+
+  --card-bg: #ffffff;
+
+  --shadow: 0 4px 15px rgba(0,0,0,0.08);
+  --radius: 12px;
+
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ===== MENU BUTTON (added) ===== */
-.menu-btn {
-    display: block; /* shown on small screens via media query */
-    position: fixed;
-    top: 16px;
-    left: 16px;
-    z-index: 60;  
-    background: transparent; 
-    color: lightgreen;
-    cursor: pointer;
-    border: none;
-    padding: 10px 12px;
-    border-radius: 10px;
-    font-size: 22px;
-    line-height: 1;
-    
-    /* box-shadow: 0 6px 18px rgba(74,74,216,0.12);  */
-    transition: transform 0.15s ease, opacity 0.15s ease;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-/* small pressed effect */
-.menu-btn:active { transform: scale(0.98); }
-
-/* ===== SIDEBAR ===== */
-.sidebar {
-    width: 230px;
-    background: #4a7540;
-    height: 100vh;
-    padding: 28px 20px;
-    border-right: 1px solid #eee;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 50;
-    transition: transform 0.28s cubic-bezier(.2,.9,.2,1);
+body{
+  display:flex;
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
 }
 
-/* When sidebar is 'open' on small screens we add class .open to show it */
-.sidebar.open {
-    transform: translateX(0);
+/* SIDEBAR */
+.sidebar{
+  width:230px;
+  background:#4a7540;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:20px;
+  transition:transform .3s ease;
 }
 
-/* collapsed state (used on small screens via media query) */
-/* default transform for small screens is set in media query below */
+.sidebar.hide{transform:translateX(-100%)}
 
-/* rest of sidebar styles unchanged */
-.sidebar-title {
-  font-size: 18px;
-  letter-spacing: 1px;
-  margin-bottom: 26px;
-  color: #ffffff;          
+.sidebar h2{
+  font-size:18px;
+  letter-spacing:1px;
+  margin-bottom:30px;
+  color:white;
 }
 
-.nav-list {
-    list-style: none;
-    margin-top: 6px;
+.sidebar ul{list-style:none}
+
+/* Sidebar menu link styling */
+.sidebar ul li a {
+  text-decoration: none;        
+  color: #e6f2e3;              
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: 6px;
+  display: block;
+  transition: 0.25s ease;
 }
 
-.nav-list li {
-    margin:6px 0;
+.sidebar ul li a:hover {
+  color: #ffffff;
+  background: rgba(255,255,255,0.08); 
 }
 
-.nav-list a {
-    text-decoration: none;
-    font-weight: 500;
-    color: #e6f2e3;
-    padding: 8px 10px;
-    display: block;
-    border-radius: 6px;
-    transition: 0.25s ease;
+.sidebar ul li.active a {
+  color: #ffffff;
+  background: rgba(255,255,255,0.18);
+  font-weight: 600;
 }
 
-.nav-list a:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
+/* Optional event box if needed later (kept same) */
+.event-box{
+  background:var(--green-mid);
+  padding:15px;
+  border-radius:10px;
+  margin-top:40px;
+  color:#fff;
+}
+.event-box button{
+  margin-top:10px;
+  padding:8px 15px;
+  background:var(--green-accent);
+  border:none;
+  color:#fff;
+  border-radius:5px;
+  cursor:pointer;
+}
+.event-box button:hover{background:#1d863a}
+
+/* MAIN */
+.main{
+  flex:1;
+  padding:20px 40px;
 }
 
-.nav-list a.active {
-    background: rgba(255, 255, 255, 0.18);
-    color: #ffffff;
-    font-weight: 600;
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-/* ===== MAIN CONTENT ===== */
-.content {
-    flex: 1;
-    padding: 50px 70px;
-    overflow-y: auto;
+.menu-icon{
+  display:none;
+  font-size:24px;
+  cursor:pointer;
+  color:#6fd684;
 }
 
-/* ===== HERO SECTION ===== */
-.hero-text h1 {
-    font-size: 40px;
-    font-weight: 600;
-    line-height: 1.2; 
-    max-width: 700px;
-    color: #2b8a3e;
+.search-box input{
+  padding:10px;
+  width:300px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  outline:none;
+  transition:.3s;
 }
-
-.hero-text i {
-    font-style: italic;
+.search-box input:focus{
+  border-color:var(--green-accent);
 }
-
-.hero-sub {
-    margin-top: 20px;
-    max-width: 520px;
-    font-size: 15px;
-    line-height: 1.6;
-    color: #555;
-}
-
-/* ===== TEAM GRID ===== */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 35px;
-    margin-top: 55px;
-}
-
-.team-card {
-    background: white;
-    padding: 20px;
-    border-radius: 14px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-.team-card:hover{
+.search-box input:hover{
   transform:scale(1.05);
-  box-shadow:0 0 25px #e2efe7;
-  border:2px solid #23a045;
+  border-color:var(--green-accent);
 }
 
-.team-card img {
-    width: 60%;
-    border-radius: 12px;
-    margin-bottom: 14px;
-}
-
-
-.team-card h3 {
-    font-size: 18px;
-    margin: 0 0 5px 0;
-}
-
-.team-card small {
-    font-size: 14px;
-    color: #777;
-}
-/* logout  */
 .logout {
   background: #e1f2e0;
   padding: 8px 12px;
@@ -164,66 +142,234 @@ body {
 }
 .logout :hover{
   background-color: #23a045;
-
 }
 
-/* ===== SIDEBAR OVERLAY (added) ===== */
-.sidebar-overlay {
+/* ABOUT WRAPPER */
+.about-wrap{
+  margin-top:20px;
+}
+
+/* HEADER */
+.about-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.about-header h2{
+  color:#2b8a3e;
+}
+
+.about-header .subtitle{
+  margin-top:4px;
+  color:#557a55;
+  max-width:580px;
+}
+
+/* HERO SECTION */
+.about-hero{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:2fr 1.4fr;
+  gap:20px;
+}
+
+.hero-text{
+  background:#ffffff;
+  padding:18px 20px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.hero-text h3{
+  color:#2b8a3e;
+  margin-bottom:8px;
+}
+
+.hero-text p{
+  margin-bottom:8px;
+  line-height:1.6;
+}
+
+.hero-box{
+  background:#e7f5e6;
+  padding:18px 20px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.hero-box h4{
+  color:#2b8a3e;
+  margin-bottom:8px;
+}
+
+.hero-box ul{
+  list-style:disc;
+  margin-left:18px;
+  line-height:1.6;
+}
+
+/* ABOUT GRID CARDS */
+.about-grid{
+  margin-top:26px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+  gap:18px;
+}
+
+.about-card{
+  background:#fff;
+  border-radius:var(--radius);
+  padding:16px 18px;
+  box-shadow:var(--shadow);
+}
+
+.about-card h4{
+  color:#2b8a3e;
+  margin-bottom:8px;
+}
+
+.about-card p{
+  line-height:1.6;
+}
+
+/* HOW IT WORKS */
+.about-how{
+  margin-top:30px;
+  background:#ffffff;
+  padding:18px 20px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.about-how h3{
+  color:#2b8a3e;
+  margin-bottom:8px;
+}
+
+.about-how ol{
+  margin-left:18px;
+  line-height:1.7;
+}
+
+/* FOOTER INFO */
+.about-footer{
+  margin-top:24px;
+  padding:18px 20px;
+  border-radius:var(--radius);
+  background:#e9f7ea;
+  box-shadow:var(--shadow);
+}
+
+.about-footer h3{
+  color:#2b8a3e;
+  margin-bottom:8px;
+}
+
+.about-footer p{
+  line-height:1.6;
+}
+
+.about-footer .small-note{
+  font-size:13px;
+  color:#577a57;
+  margin-top:4px;
+}
+
+/* ---------- Responsive layout ---------- */
+
+@media(max-width:768px){
+  body{flex-direction:column}
+  .sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    height:100%;
+    z-index:100;
+  }
+
+  .menu-icon{display:block}
+  .search-box input{width:200px}
+
+  .about-hero{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ---------- Responsive sidebar behavior & overlay ---------- */
+
+/* ensure transform is used for hide/show so animation works smoothly */
+.sidebar{
+  transform: translateX(0);
+  transition: transform .28s ease, box-shadow .28s ease;
+  will-change: transform;
+}
+
+/* mobile: keep sidebar hidden by default (we'll toggle .hide) */
+@media (max-width: 992px) {
+  .sidebar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 1200;
+    width: 260px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    transform: translateX(-100%);
+    background: var(--sidebar-bg);
+  }
+
+  /* class to show the sidebar */
+  .sidebar:not(.hide){
+    transform: translateX(0);
+  }
+
+  /* menu icon visible on small devices */
+  .menu-icon{
+    display:block;
+    color:var(--green-accent);
+    font-size:22px;
+    cursor:pointer;
+  }
+
+  /* overlay covers page when sidebar open */
+  .sidebar-overlay{
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.28);
-    z-index: 40;
-    transition: opacity 0.2s ease;
-    opacity: 0;
+    z-index: 1100;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(1px);
+  }
+  .sidebar-overlay.show{
+    display:block;
+  }
+
+  /* ensure main content isn't interactive under overlay */
+  .main[aria-hidden="true"]{
+    pointer-events: none;
+    user-select: none;
+  }
 }
 
-/* When visible (small screens) we'll set display:block and opacity:1 via media query when sidebar is open */
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-    /* show menu button on small screens */
-    .menu-btn {
-        display: block;
-    }
-
-    /* make sidebar overlay and sidebar behavior for small screens */
-    .sidebar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 100vh;
-        transform: translateX(-110%); /* hidden by default */
-        will-change: transform;
-        box-shadow: 8px 0 30px rgba(24, 20, 64, 0.08);
-    }
-
-    /* when open we add .open class (see JS) */
-    .sidebar.open + .content { /* no effect but keeps specificity; actual transform handled on .sidebar.open */ }
-
-    .sidebar.open ~ .sidebar-overlay {
-        display: block;
-        opacity: 1;
-    }
-
-    /* overlay visible when sidebar is open (we rely on .sidebar.open to show overlay) */
-    .sidebar.open ~ .sidebar-overlay {
-        display: block;
-    }
-
-    /* show overlay with opacity transition */
-    .sidebar.open ~ .sidebar-overlay {
-        opacity: 1;
-    }
-
-    /* main content should still scroll underneath; padding can be slightly reduced on small screens */
-    .content {
-        padding: 22px 18px;
-    }
+/* larger screens: keep menu-icon hidden (restore original behavior) */
+@media (min-width: 993px) {
+  .sidebar{
+    position: static;
+    transform: translateX(0) !important;
+    width: 230px;
+    box-shadow: none;
+  }
+  .menu-icon{ display:none; }
+  .sidebar-overlay{ display:none; }
 }
 
-/* Keep theme and look consistent on large screens; menu button hidden there */
-@media (min-width: 901px) {
-    .sidebar-overlay { display: none !important; }
-    .menu-btn { display: none !important; }
+/* small accessibility focus state for the menu icon */
+.menu-icon:focus{
+  outline: 3px solid rgba(35,160,69,0.2);
+  outline-offset: 3px;
+  border-radius:6px;
 }
