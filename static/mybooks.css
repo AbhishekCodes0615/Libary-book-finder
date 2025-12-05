@@ -35,7 +35,7 @@ body{
 }
 
 /* SIDEBAR */
-.sidebar{
+.sidebar
   width:230px;
   background:#4a7540;
   color:var(--sidebar-text);

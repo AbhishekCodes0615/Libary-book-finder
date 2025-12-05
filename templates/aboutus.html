@@ -1,81 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='aboutus.css') }}">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us — Library Book Finder</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='aboutus.css') }}">
+  <!-- font awesome for user icon (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
-
 <body>
 
-    <!-- MENU BUTTON (added) -->
-    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-        <h2 class="sidebar-title">LIBRARY BOOK FINDER</h2>
-
-        <ul class="nav-list">
-            <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+<!-- Sidebar (same structure & theme) -->
+<div id="sidebar" class="sidebar hide" aria-label="Primary">
+  <div>
+    <h2> LIBRARY BOOK FINDER</h2>
+    <ul>
+      <li><a href="{{ url_for('dashboard') }}">Home</a></li>
       <li><a href="{{ url_for('catalogue') }}">Catalogue</a></li>
       <li><a href="{{ url_for('mybooks') }}">My Books</a></li>
       <li class="active"><a href="{{ url_for('aboutus') }}">About Us</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Topbar with responsive menu button (shows on mini screen) -->
+  <div class="topbar">
+    <span id="menuBtn" class="menu-icon" onclick="toggleMenu()" role="button" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">☰</span>
+    <div class="search-box" role="search">
+      <input type="text" placeholder="Search for books, authors, ISBN..." aria-label="Search all books">
+    </div>
+    <div class="logout">Logout</div> 
+  </div>
+
+  <!-- ABOUT CONTENT -->
+  <div class="about-wrap" role="main">
+    <div class="about-header">
+      <div>
+        <h2>About Library Book Finder</h2>
+        <p class="subtitle">
+          A smart way to search, explore, and manage books in your library.
+        </p>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <div class="hero-text">
+        <h3>Our Mission</h3>
+        <p>
+          Library Book Finder is designed to make it effortless for students, teachers,
+          and library members to discover books quickly. From searching titles,
+          authors, and ISBNs to reserving books, everything is organized in one
+          clean and simple dashboard.
+        </p>
+        <p>
+          We focus on speed, simplicity, and a friendly interface so that
+          you spend less time searching and more time reading.
+        </p>
+      </div>
+      <div class="hero-box">
+        <h4>Key Highlights</h4>
+        <ul>
+          <li>Fast search by title, author, category, and ISBN.</li>
+          <li>Simple dashboard for managing your books.</li>
+          <li>Responsive design — works on mobile & desktop.</li>
+          <li>Clean, green theme for a calm reading vibe.</li>
         </ul>
-    </aside>
-    
+      </div>
+    </section>
 
-    <!-- MAIN CONTENT -->
-    <main class="content">
-        
-        
+    <!-- Features / Info cards -->
+    <section class="about-grid">
+      <div class="about-card">
+        <h4>For Students</h4>
+        <p>
+          Quickly find the books you need for your course or interest.
+          Filter by category like Literature, Sci-Fi, Historical,
+          and Computer Science, then add them to your personal list.
+        </p>
+      </div>
+      <div class="about-card">
+        <h4>For Librarians</h4>
+        <p>
+          Keep track of popular titles, manage reservations, and
+          organize the collection digitally while still keeping the
+          physical library experience alive.
+        </p>
+      </div>
+      <div class="about-card">
+        <h4>For Everyone</h4>
+        <p>
+          Whether you just love reading or you’re doing research,
+          Library Book Finder helps you explore new books and
+          keep your favourites within reach.
+        </p>
+      </div>
+    </section>
 
-        <!-- HERO TEXT -->
-        <section class="hero-text">
-            <h1>
-                Meet our team of <i>creators</i>,  
-                <i>designers</i>, and  
-                <i>problem solvers</i>
-            </h1>
+    <!-- How it works -->
+    <section class="about-how">
+      <h3>How It Works</h3>
+      <ol>
+        <li>Open the <strong>Catalogue</strong> to browse all available books.</li>
+        <li>Use the search bar and filters to refine the list.</li>
+        <li>Open a book’s details to learn more and reserve it.</li>
+        <li>Track your selected books in the <strong>My Books</strong> section.</li>
+      </ol>
+    </section>
 
-            <p class="hero-sub">
-                A Library Book Finder is a system that helps users quickly locate a book's position and availability within a library, saving time and effort compared to a manual search. It typically involves an interface where a user can search for a book by title, or author, and the system responds with its location, often using data from a library's database. This projects are valuable for large libraries and can be implemented as web or mobile applications. 
-            </p>
-        </section>
-        
+    <!-- Contact / Footer info -->
+    <section class="about-footer">
+      <h3>Contact & Support</h3>
+      <p>
+        Have suggestions or found an issue? You can reach the Library
+        Book Finder team through your library staff or system administrator.
+      </p>
+      <p class="small-note">
+        This project is created as a smart library management tool to enhance
+        the reading experience and simplify book discovery.
+      </p>
+    </section>
+  </div>
+</div>
 
-        <!-- TEAM GRID -->
-        <section class="team-grid">
+<!-- overlay (for mobile when sidebar open) -->
+<div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
 
-            <div class="team-card">
-                <img src="https://img.freepik.com/free-vector/woman-with-long-brown-hair-pink-shirt_90220-2940.jpg?semt=ais_hybrid&w=740&q=80" alt="Team member">
-                <h3>Ashi Agarwal</h3>
-                <small>MySQL,PYTHON</small>
-            </div>
+<!-- SCRIPT: responsive sidebar toggle -->
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+  const mainContent = document.querySelector('.main');
+  const menuBtn = document.getElementById('menuBtn');
 
-            <div class="team-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Team member">
-                <h3>Ankit Singh</h3>
-                <small>JAVASCRIPT</small>
-            </div>
+  function openSidebar() {
+    sidebar.classList.remove('hide');
+    sidebarOverlay.classList.add('show');
+    mainContent.setAttribute('aria-hidden', 'true');
+    menuBtn.setAttribute('aria-expanded', 'true');
+  }
 
-            
+  function closeSidebar() {
+    sidebar.classList.add('hide');
+    sidebarOverlay.classList.remove('show');
+    mainContent.removeAttribute('aria-hidden');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
 
-            <div class="team-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Team member">
-                <h3>Abshishek Kumar</h3>
-                <small>HTML,CSS</small>
-            </div>
+  function toggleMenu() {
+    const isHidden = sidebar.classList.contains('hide');
+    if (isHidden) {
+      openSidebar();
+    } else {
+      closeSidebar();
+    }
+  }
 
-        </section>
+  // Close sidebar when clicking outside on overlay (mobile)
+  sidebarOverlay.addEventListener('click', closeSidebar);
 
-    </main>
-
-    <!-- overlay to close sidebar on small screens -->
-    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
-
-    <script src="{{ url_for('static', filename='aboutus.js') }}"></script>
+  // Optional: close on ESC key
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeSidebar();
+    }
+  });
+</script>
+<script src="{{ url_for('static', filename='aboutus.js') }}"></script>
 
 </body>
 </html>
