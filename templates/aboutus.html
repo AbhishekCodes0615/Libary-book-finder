@@ -27,9 +27,7 @@
   <!-- Topbar with responsive menu button (shows on mini screen) -->
   <div class="topbar">
     <span id="menuBtn" class="menu-icon" onclick="toggleMenu()" role="button" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">☰</span>
-    <div class="search-box" role="search">
-      <input type="text" placeholder="Search for books, authors, ISBN..." aria-label="Search all books">
-    </div>
+    
     <div class="logout">Logout</div> 
   </div>
 
@@ -78,14 +76,6 @@
           Quickly find the books you need for your course or interest.
           Filter by category like Literature, Sci-Fi, Historical,
           and Computer Science, then add them to your personal list.
-        </p>
-      </div>
-      <div class="about-card">
-        <h4>For Librarians</h4>
-        <p>
-          Keep track of popular titles, manage reservations, and
-          organize the collection digitally while still keeping the
-          physical library experience alive.
         </p>
       </div>
       <div class="about-card">
@@ -166,6 +156,14 @@
       closeSidebar();
     }
   });
+</script>
+<script>
+  const logoutBtn = document.querySelector(".logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      window.location.href = "{{ url_for('home') }}";
+    });
+  }
 </script>
 <script src="{{ url_for('static', filename='aboutus.js') }}"></script>
 

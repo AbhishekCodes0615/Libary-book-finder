@@ -53,7 +53,7 @@
 <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
 
 
-<script src="{{ url_for('static', filename='=mybooks.js') }}"></script>
+<script src="{{ url_for('static', filename='mybooks.js') }}"></script>
 
 <script>
 (function(){
@@ -137,6 +137,14 @@
   // debug prints so you can check quickly
   console.log('Menu fix installed — menuBtn:', !!menuBtn, 'sidebar:', !!sidebar, 'overlay:', !!overlay);
 })();
+</script>
+<script>
+  const logoutBtn = document.querySelector(".logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      window.location.href = "{{ url_for('home') }}";
+    });
+  }
 </script>
 
 </body>

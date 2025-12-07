@@ -74,36 +74,16 @@
       </div>
     </div>
   </div>
-
-  <div class="section">
-    <div class="section-box">
-      <h4>Reserved Books</h4>
-      <ul>
-        <li>The Secret Lives of Colour</li>
-        <li>Here in the Dark</li>
-        <li>Klara and the Sun</li>
-      </ul>
-    </div>
-
-    <div class="section-box">
-      <h4>Favourite Authors</h4>
-      <ul>
-        <li>Emily Brontë</li>
-        <li>Alex Miller</li>
-        <li>Chinua Achebe</li>
-      </ul>
-    </div>
-
-    <div class="section-box">
-      <h4>Popular Reads</h4>
-      <ul>
-        <li>A Passage North</li>
-        <li>The Sweetness of Water</li>
-      </ul>
-    </div>
-  </div>
 </div>
-
+<script>
+  const logoutBtn = document.querySelector(".logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      window.location.href = "{{ url_for('home') }}";
+    });
+  }
+</script>
+<script src="{{ url_for('static', filename='catalogue.js') }}"></script>
 <script src="{{ url_for('static', filename='home.js') }}"></script>
 
 </body>

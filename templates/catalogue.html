@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<!-- reuse existing sidebar and topbar from home.html, make sure links point correctly -->
+
 <div id="sidebar" class="sidebar hide" aria-label="Primary">
   <div>
     <h2> LIBRARY BOOK FINDER</h2>
@@ -78,7 +78,14 @@
     </div>
   </div>
 </div>
-
+<script>
+  const logoutBtn = document.querySelector(".logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      window.location.href = "{{ url_for('home') }}";
+    });
+  }
+</script>
 <script src="{{ url_for('static', filename='catalogue.js') }}"></script>
 </body>
 </html>
