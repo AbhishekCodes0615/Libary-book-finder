@@ -51,10 +51,10 @@ def login():
     user = cursor.fetchone()
 
     if user:
-        flash("✅ Login Successful!", "success")
+        flash("Login Successful!", "success")
         return redirect(url_for("dashboard"))
     else:
-        flash("❌ Invalid Login ID or Password. Please try again.", "danger")
+        flash("Invalid Login ID or Password. Please try again.", "danger")
         return redirect(url_for("home"))
     
 if __name__ == "__main__":
